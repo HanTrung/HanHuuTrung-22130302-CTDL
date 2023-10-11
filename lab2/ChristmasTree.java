@@ -1,37 +1,38 @@
 package tuan2;
 
 public class ChristmasTree {
-    public static void main(String[] args) {
-        int n = 4; 
-        drawChristmasTree(n);
-    }
+	public static void main(String[] args) {
+		int n = 4;
+		drawChristmasTree(n);
+	}
 
-    public static void drawChristmasTree(int n) {
-      
-        for (int i = 1; i <= n; i++) {
-            drawPyramid(i, n);
-        }
+	public static void drawChristmasTree(int n) {
 
-        // Vẽ thân cây
-        for (int i = 1; i <= n; i++) {
-            for (int j = 1; j <= n - 1; j++) {
-                System.out.print(" "); 
-            }
-            System.out.println("X");
-        }
-    }
+		for (int i = 1; i < n; i++) {
+			drawPyramid(i);
+		}
+	}
 
-    public static void drawPyramid(int height, int n) {
-        for (int i = 1; i <= height; i++) {
-            for (int j = 1; j <= n - i; j++) {
-                System.out.print(" ");
-            }
+	public static void drawPyramid(int n) {
+		drawPyramidHelper(n, 1);
+	}
 
-            for (int k = 1; k <= 2 * i - 1; k++) {
-                System.out.print("X");
-            }
+	public static void drawPyramidHelper(int n, int currentRow) {
+		if (currentRow > n) {
+			return;
+		}
 
-            System.out.println();
-        }
-    }
+		drawRow(n, currentRow, 1);
+		drawPyramidHelper(n, currentRow + 1);
+	}
+
+	public static void drawRow(int n, int currentRow, int currentColumn) {
+		if (currentColumn > 2 * currentRow - 1) {
+			System.out.println();
+			return;
+		}
+
+		System.out.print("X");
+		drawRow(n, currentRow, currentColumn + 1);
+	}
 }
